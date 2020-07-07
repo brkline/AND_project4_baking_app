@@ -1,5 +1,6 @@
-*.iml
+# Project exclude paths
 /.gradle/
+*.iml
 .gradle
 /local.properties
 /.idea/*
@@ -7,4 +8,3 @@
 /build
 /captures
 .externalNativeBuild
-.cxx

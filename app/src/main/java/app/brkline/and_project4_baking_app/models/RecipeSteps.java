@@ -3,12 +3,19 @@ package app.brkline.and_project4_baking_app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RecipeSteps implements Parcelable {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("shortDescription")
     private String shortDescription;
+    @SerializedName("description")
     private String description;
+    @SerializedName("videoURL")
     private String videoUrl;
+    @SerializedName("thumbnailURL")
     private String thumbnailUrl;
 
     public RecipeSteps() {

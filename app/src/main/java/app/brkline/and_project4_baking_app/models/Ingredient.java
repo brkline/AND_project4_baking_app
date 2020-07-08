@@ -3,10 +3,15 @@ package app.brkline.and_project4_baking_app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Ingredient implements Parcelable {
 
+    @SerializedName("quantity")
     private Double quantity;
+    @SerializedName("measure")
     private String measure;
+    @SerializedName("ingredient")
     private String ingredient;
 
     public Ingredient() {

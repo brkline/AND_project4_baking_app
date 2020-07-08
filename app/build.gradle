@@ -21,9 +21,20 @@ android {
         }
     }
 
-    viewBinding {
-        enabled true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    // Added due to DataBinding example provided by Mentor but that didn't seem to work
+    // when I am just using ViewBinding.
+//    buildFeatures {
+//        dataBinding true
+//    }
 }
 
 dependencies {
@@ -47,11 +58,15 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     // CardView
-    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
+
+    // OKHttp
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okHttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.okHttpVersion}"
 
     // GSON
     implementation 'com.google.code.gson:gson:2.8.5'

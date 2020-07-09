@@ -60,7 +60,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                         Intent intent = new Intent(context, Recipe.class);
                         intent.putExtra(Constants.RECIPE_POSITION_SELECTED, recipes.get(getAdapterPosition()));
                         Recipe recipe = recipes.get(getAdapterPosition());
-                        intent.putExtra(Constants.RECIPE_EXTRA, recipe);
+                        intent.putExtra(Constants.RECIPE_EXTRA_DATA, recipe);
                         context.startActivity(intent);
                     });
         }

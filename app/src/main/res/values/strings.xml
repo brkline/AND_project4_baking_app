@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AND_project4_baking_app</string>
+    <string name="recipe_detail_error_message">Recipe detail not found.  Please try again.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

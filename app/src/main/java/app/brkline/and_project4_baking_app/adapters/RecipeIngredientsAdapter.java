@@ -1,6 +1,7 @@
 package app.brkline.and_project4_baking_app.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import app.brkline.and_project4_baking_app.databinding.RecipeListItemBinding;
 import app.brkline.and_project4_baking_app.models.Ingredient;
 
 public class RecipeIngredientsAdapter extends RecyclerView.Adapter<IngredientsViewHolder> {
@@ -23,7 +25,9 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<IngredientsVi
     @NonNull
     @Override
     public IngredientsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        RecipeListItemBinding recipeListItemBinding = RecipeListItemBinding.inflate(layoutInflater, parent, false);
+        return new RecipeAdapter.RecipeViewHolder(recipeListItemBinding);
     }
 
     @Override

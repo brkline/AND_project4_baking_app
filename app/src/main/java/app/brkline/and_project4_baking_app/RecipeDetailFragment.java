@@ -17,14 +17,12 @@ import java.util.List;
 
 import app.brkline.and_project4_baking_app.adapters.RecipeIngredientsAdapter;
 import app.brkline.and_project4_baking_app.databinding.FragmentRecipeDetailBinding;
-import app.brkline.and_project4_baking_app.databinding.RecipeIngredientItemBinding;
 import app.brkline.and_project4_baking_app.models.Ingredient;
 
 public class RecipeDetailFragment extends Fragment {
 
     private List<Ingredient> ingredients;
-//    FragmentRecipeDetailBinding fragmentRecipeDetailBinding;
-//    private RecipeIngredientItemBinding ingredientItemBinding;
+    FragmentRecipeDetailBinding fragmentRecipeDetailBinding;
 
     public RecipeDetailFragment() {
         // Required empty public constructor
@@ -47,16 +45,15 @@ public class RecipeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        fragmentRecipeDetailBinding = FragmentRecipeDetailBinding.inflate(inflater, container, false);
-//        View view = fragmentRecipeDetailBinding.getRoot();
-//        return view;
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        fragmentRecipeDetailBinding = FragmentRecipeDetailBinding.inflate(inflater, container, false);
+        View view = fragmentRecipeDetailBinding.getRoot();
+        return view;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        fragmentRecipeDetailBinding = null;
+        fragmentRecipeDetailBinding = null;
     }
 
     @Override
@@ -67,18 +64,14 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     private void setupRecipeStepsAdapter() {
-//        RecyclerView recipeIngredientsRecyclerView = fragmentRecipeDetailBinding.recipeDetailFragmentIngredientsRv;
-//        final RecipeIngredientsAdapter recipeIngredientsAdapter = new RecipeIngredientsAdapter(getContext(), ingredients);
-//        recipeIngredientsRecyclerView.setAdapter(recipeIngredientsAdapter);
-//        recipeIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        ViewCompat.setNestedScrollingEnabled(recipeIngredientsRecyclerView, false);
+        RecyclerView recipeIngredientsRecyclerView = fragmentRecipeDetailBinding.recipeDetailFragmentIngredientsRv;
+        final RecipeIngredientsAdapter recipeIngredientsAdapter = new RecipeIngredientsAdapter(getContext(), ing);
+        recipeIngredientsRecyclerView.setAdapter(recipeIngredientsAdapter);
+        recipeIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ViewCompat.setNestedScrollingEnabled(recipeIngredientsRecyclerView, false);
     }
 
     private void setupRecipeIngredientsAdapter() {
-        RecyclerView ingredientRecyclerView = getActivity().findViewById(R.id.recipe_detail_fragment_ingredients_rv);
-        final RecipeIngredientsAdapter ingredientsAdapter = new RecipeIngredientsAdapter(ingredients);
-        ingredientRecyclerView.setAdapter(ingredientsAdapter);
-        ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ViewCompat.setNestedScrollingEnabled(ingredientRecyclerView, false);
+
     }
 }

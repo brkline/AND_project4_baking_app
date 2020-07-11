@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import app.brkline.and_project4_baking_app.Constants;
 import app.brkline.and_project4_baking_app.R;
+import app.brkline.and_project4_baking_app.RecipeDetailActivity;
 import app.brkline.and_project4_baking_app.databinding.RecipeListItemBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 
@@ -20,6 +22,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     private List<Recipe> recipes;
     private Context context;
+    private Recipe recipe;
 
     public RecipeAdapter(Context context, List<Recipe> recipes) {
         this.context = context;
@@ -39,7 +42,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
-        Recipe recipe = recipes.get(position);
+        recipe = recipes.get(position);
         holder.bindRecipe(recipe);
     }
 
@@ -48,21 +51,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         return null == recipes?0:recipes.size();
     }
 
-    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         RecipeListItemBinding recipeListItemBinding;
+        int position;
 
         public RecipeViewHolder(RecipeListItemBinding recipeListItemBinding) {
             super(recipeListItemBinding.getRoot());
             this.recipeListItemBinding = recipeListItemBinding;
             recipeListItemBinding.getRoot()
-                    .setOnClickListener(view ->{
-                        Intent intent = new Intent(context, Recipe.class);
-                        intent.putExtra(Constants.RECIPE_POSITION_SELECTED, recipes.get(getAdapterPosition()));
+                    .setOnClickListener(view -> {
+                        Intent intent = new Intent(context, RecipeDetailActivity.class);
+                        position = getAdapterPosition();
+                        intent.putExtra(Constants.RECIPE_POSITION_SELECTED, position);
                         Recipe recipe = recipes.get(getAdapterPosition());
                         intent.putExtra(Constants.RECIPE_EXTRA, recipe);
                         context.startActivity(intent);
                     });
+
         }
 
         void bindRecipe(Recipe recipe) {
@@ -72,11 +78,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                 recipeListItemBinding.recipeListItemRecipeIv.setImageResource(R.drawable.chocolate_cake_with_raspberries);
             }
             recipeListItemBinding.recipeListItemRecipeTitleTv.setText(recipe.getName());
-        }
-
-        @Override
-        public void onClick(View view) {
-            Recipe recipe = recipes.get(getAdapterPosition());
         }
     }
 }

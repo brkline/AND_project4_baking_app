@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import app.brkline.and_project4_baking_app.R;
+import app.brkline.and_project4_baking_app.databinding.RecipeIngredientItemBinding;
 import app.brkline.and_project4_baking_app.databinding.RecipeListItemBinding;
 import app.brkline.and_project4_baking_app.models.Ingredient;
 
 public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredientsAdapter.IngredientViewHolder> {
 
     private List<Ingredient> ingredients;
-    private Context context;
 
-    public RecipeIngredientsAdapter(Context context, List<Ingredient> ingredients) {
-        this.context = context;
+    public RecipeIngredientsAdapter(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -27,11 +26,8 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredi
     @Override
     public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        RecipeListItemBinding recipeListItemBinding = RecipeListItemBinding.inflate(layoutInflater, parent, false);
-        return new IngredientViewHolder(recipeListItemBinding);
-          // Data Binding inflate example from Mentor - Doesn't seem to work if I am using just ViewBinding.
-//        RecipeListItemBinding recipeListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.recipe_list_item, parent, false);
-//        return new RecipeViewHolder(recipeListItemBinding);
+        RecipeIngredientItemBinding ingredientItemBinding = RecipeIngredientItemBinding.inflate(layoutInflater, parent, false);
+        return new IngredientViewHolder(ingredientItemBinding);
     }
 
     @Override
@@ -47,11 +43,11 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredi
 
     public class IngredientViewHolder extends RecyclerView.ViewHolder {
 
-        RecipeListItemBinding recipeListItemBinding;
+        RecipeIngredientItemBinding ingredientItemBinding;
 
-        public IngredientViewHolder(RecipeListItemBinding recipeListItemBinding) {
-            super(recipeListItemBinding.getRoot());
-            this.recipeListItemBinding = recipeListItemBinding;
+        public IngredientViewHolder(RecipeIngredientItemBinding ingredientItemBinding) {
+            super(ingredientItemBinding.getRoot());
+            this.ingredientItemBinding = ingredientItemBinding;
 //            recipeListItemBinding.getRoot()
 //                    .setOnClickListener(view ->{
 //                        Intent intent = new Intent(context, Recipe.class);
@@ -63,12 +59,9 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredi
         }
 
         void bindRecipe(Ingredient ingredient) {
-            if (!ingredient.getImage().isEmpty()) {
-                recipeListItemBinding.recipeListItemRecipeIv.setImageResource(R.drawable.chocolate_cake_with_raspberries);
-            } else {
-                recipeListItemBinding.recipeListItemRecipeIv.setImageResource(R.drawable.chocolate_cake_with_raspberries);
-            }
-            recipeListItemBinding.recipeListItemRecipeTitleTv.setText(ingredient.getName());
+            ingredientItemBinding.recipeIngredientItemQuantityTv.setText(ingredient.getQuantity().toString());
+            ingredientItemBinding.recipeIngredientItemMeasureTv.setText(ingredient.getMeasure());
+            ingredientItemBinding.recipeIngredientItemIngredientTv.setText(ingredient.getIngredient());
         }
 
 //        @Override

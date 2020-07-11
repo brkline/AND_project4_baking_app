@@ -3,37 +3,18 @@ package app.brkline.and_project4_baking_app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import app.brkline.and_project4_baking_app.Constants;
-
-//@Entity(tableName = Constants.RECIPE_TABLE_NAME)
 public class Recipe implements Parcelable {
 
-//    @NonNull
-//    @PrimaryKey
-    @SerializedName("id")
     private int id;
-    @SerializedName("name")
     private String name;
-    @SerializedName("servings")
     private int servings;
-    @SerializedName("image")
     private String image;
-    @SerializedName("ingredients")
     private List<Ingredient> ingredients;
-    @SerializedName("steps")
     private List<RecipeSteps> steps;
 
-    @Ignore
     public Recipe() {
 
     }

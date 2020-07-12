@@ -7,15 +7,19 @@
     tools:context=".RecipeDetailActivity">
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/recipe_detail_ingredient_frag"
-        android:name="app.brkline.and_project4_baking_app.IngredientFragment"/>
+        android:name="app.brkline.and_project4_baking_app.IngredientFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/recipe_detail_steps_frag"
-        android:name="app.brkline.and_project4_baking_app.StepsFragment"/>
+        android:name="app.brkline.and_project4_baking_app.StepsFragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recipe_detail_ingredient_frag"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

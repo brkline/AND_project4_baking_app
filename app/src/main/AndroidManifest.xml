@@ -11,8 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StepDetailActivity"></activity>
-        <activity android:name=".RecipeDetailActivity" />
+
+        <activity
+            android:name=".StepDetailActivity"
+            android:parentActivityName=".RecipeDetailActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.brkline.and_project4_baking_app.RecipeDetailActivity" />
+        </activity>
+        <activity android:name=".RecipeDetailActivity"
+            android:parentActivityName=".MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.brkline.and_project4_baking_app.MainActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

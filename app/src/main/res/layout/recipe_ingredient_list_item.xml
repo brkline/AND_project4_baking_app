@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recipe_ingredient_list_item_quantity_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="55"
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/recipe_ingredient_list_item_measure_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/recipe_ingredient_list_item_quantity_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TBSP"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/recipe_ingredient_list_item_ingredient_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@+id/recipe_ingredient_list_item_measure_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="This is an ingredient" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,17 +3,12 @@ package app.brkline.and_project4_baking_app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import app.brkline.and_project4_baking_app.Constants;
 
 //@Entity(tableName = Constants.RECIPE_TABLE_NAME)
 public class Recipe implements Parcelable {
@@ -31,14 +26,14 @@ public class Recipe implements Parcelable {
     @SerializedName("ingredients")
     private List<Ingredient> ingredients;
     @SerializedName("steps")
-    private List<RecipeSteps> steps;
+    private List<RecipeStep> steps;
 
     @Ignore
     public Recipe() {
 
     }
 
-    public Recipe(int id, String name, int servings, String image, List<Ingredient> ingredients, List<RecipeSteps> steps) {
+    public Recipe(int id, String name, int servings, String image, List<Ingredient> ingredients, List<RecipeStep> steps) {
         this.id = id;
         this.name = name;
         this.servings = servings;
@@ -67,7 +62,7 @@ public class Recipe implements Parcelable {
         ingredients = new ArrayList<>();
         in.readList(ingredients, Ingredient.class.getClassLoader());
         steps = new ArrayList<>();
-        in.readList(steps, RecipeSteps.class.getClassLoader());
+        in.readList(steps, RecipeStep.class.getClassLoader());
     }
 
     @Override
@@ -125,11 +120,11 @@ public class Recipe implements Parcelable {
         this.ingredients = ingredients;
     }
 
-    public List<RecipeSteps> getSteps() {
+    public List<RecipeStep> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<RecipeSteps> steps) {
+    public void setSteps(List<RecipeStep> steps) {
         this.steps = steps;
     }
 }

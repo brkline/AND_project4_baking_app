@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import app.brkline.and_project4_baking_app.adapters.RecipeIngredientsAdapter;
+import app.brkline.and_project4_baking_app.adapters.RecipeStepsAdapter;
 import app.brkline.and_project4_baking_app.models.Recipe;
 
 public class RecipeDetailActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
+        // Setup our ingredients RecyclerView
         setTitle(recipe.getName());
         RecipeIngredientsAdapter recipeIngredientsAdapter = new RecipeIngredientsAdapter(RecipeDetailActivity.this, recipe.getIngredients());
         RecyclerView.LayoutManager recipeIngredientsLayoutManager = new LinearLayoutManager(RecipeDetailActivity.this);
@@ -43,6 +45,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeIngredientsRecyclerView.setVisibility(View.VISIBLE);
         recipeIngredientsRecyclerView.setLayoutManager(recipeIngredientsLayoutManager);
         recipeIngredientsRecyclerView.setAdapter(recipeIngredientsAdapter);
+
+        // Setup our steps RecyclerView
+        RecipeStepsAdapter recipeStepsAdapter = new RecipeStepsAdapter(RecipeDetailActivity.this, recipe.getSteps());
+        RecyclerView.LayoutManager recipeStepsLayoutManager = new LinearLayoutManager(RecipeDetailActivity.this);
+        RecyclerView recipeStepsRecyclerView = findViewById(R.id.fragment_steps_rv);
+        recipeStepsRecyclerView.setVisibility(View.VISIBLE);
+        recipeStepsRecyclerView.setLayoutManager(recipeStepsLayoutManager);
+        recipeStepsRecyclerView.setAdapter(recipeStepsAdapter);
     }
 
     private void closeOnError() {

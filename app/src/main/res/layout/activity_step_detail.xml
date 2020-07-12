@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".StepDetailActivity">
 
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/activity_step_detail_exoplayer_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/activity_step_detail_step_header_tv"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/step_detail_step_heading"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_step_detail_exoplayer_view"/>
+
+    <TextView
+        android:id="@+id/activity_step_detail_step_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_step_detail_step_header_tv" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/activtity_step_detail_bottom_nav"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

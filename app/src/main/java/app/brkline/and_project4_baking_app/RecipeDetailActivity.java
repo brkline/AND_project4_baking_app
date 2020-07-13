@@ -12,10 +12,12 @@ import android.widget.Toast;
 import app.brkline.and_project4_baking_app.adapters.RecipeIngredientsAdapter;
 import app.brkline.and_project4_baking_app.adapters.RecipeStepsAdapter;
 import app.brkline.and_project4_baking_app.models.Recipe;
+import app.brkline.and_project4_baking_app.models.RecipeStep;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class RecipeDetailActivity extends AppCompatActivity implements RecipeStepsAdapter.RecipeStepClickListener {
 
     Recipe recipe;
+    int recipePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +29,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        int position = intent.getIntExtra(Constants.RECIPE_POSITION_SELECTED, Constants.RECIPE_DEFAULT_POSITION_SELECTED);
-        if (position == Constants.RECIPE_DEFAULT_POSITION_SELECTED) {
+        recipePosition = intent.getIntExtra(Constants.RECIPE_POSITION_SELECTED, Constants.RECIPE_DEFAULT_POSITION_SELECTED);
+        if (recipePosition == Constants.RECIPE_DEFAULT_POSITION_SELECTED) {
             closeOnError();
         }
 
@@ -47,7 +49,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeIngredientsRecyclerView.setAdapter(recipeIngredientsAdapter);
 
         // Setup our steps RecyclerView
-        RecipeStepsAdapter recipeStepsAdapter = new RecipeStepsAdapter(RecipeDetailActivity.this, recipe.getSteps());
+        RecipeStepsAdapter recipeStepsAdapter = new RecipeStepsAdapter(RecipeDetailActivity.this, recipe.getSteps(), RecipeDetailActivity.this);
         RecyclerView.LayoutManager recipeStepsLayoutManager = new LinearLayoutManager(RecipeDetailActivity.this);
         RecyclerView recipeStepsRecyclerView = findViewById(R.id.fragment_steps_rv);
         recipeStepsRecyclerView.setVisibility(View.VISIBLE);
@@ -58,5 +60,16 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.recipe_detail_no_recipe, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRecipeStepClick(RecipeStep recipeStep) {
+        if (null != recipeStep) {
+            Intent intent = new Intent(RecipeDetailActivity.this, StepDetailActivity.class);
+            intent.putExtra(Constants.STEP_EXTRA, recipeStep);
+            intent.putExtra(Constants.RECIPE_EXTRA, recipe);
+            intent.putExtra(Constants.RECIPE_POSITION_SELECTED, recipePosition);
+            startActivity(intent);
+        }
     }
 }

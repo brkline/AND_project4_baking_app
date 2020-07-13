@@ -22,10 +22,14 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
 
     private List<RecipeStep> recipeSteps;
     private Context context;
+    private RecipeStepClickListener recipeStepClickListener;
 
-    public RecipeStepsAdapter(Context context, List<RecipeStep> recipeSteps) {
+    public RecipeStepsAdapter(Context context,
+                              List<RecipeStep> recipeSteps,
+                              RecipeStepClickListener recipeStepClickListener) {
         this.context = context;
         this.recipeSteps = recipeSteps;
+        this.recipeStepClickListener = recipeStepClickListener;
     }
 
     @NonNull
@@ -49,6 +53,10 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         }
     }
 
+    public interface RecipeStepClickListener {
+        void onRecipeStepClick(RecipeStep recipeStep);
+    }
+
     class RecipeStepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView shortDescriptionTextView;
@@ -64,9 +72,10 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         @Override
         public void onClick(View view) {
             RecipeStep recipeStep = recipeSteps.get(getAdapterPosition());
-            Intent intent = new Intent(context, StepDetailActivity.class);
-            intent.putExtra(Constants.STEP_EXTRA, recipeStep);
-            context.startActivity(intent);
+            recipeStepClickListener.onRecipeStepClick(recipeStep);
+//            Intent intent = new Intent(context, StepDetailActivity.class);
+//            intent.putExtra(Constants.STEP_EXTRA, recipeStep);
+//            context.startActivity(intent);
         }
 
         public void bindSteps(RecipeStep recipeStep) {

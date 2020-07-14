@@ -12,7 +12,7 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent"/>-->
-    <include layout="@layout/toolbar" />
+<!--    <include layout="@layout/toolbar" />-->
 
     <TextView
         android:id="@+id/activity_step_detail_step_header_tv"
@@ -24,7 +24,8 @@
         android:textStyle="bold"
         android:textAllCaps="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp" />
 <!--        app:layout_constraintTop_toBottomOf="@id/activity_step_detail_exoplayer_view"/>-->
 
 

@@ -79,15 +79,15 @@ public class StepDetailActivity extends AppCompatActivity {
 //        super.onBackPressed();
 //    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            navigateUpTo(new Intent(StepDetailActivity.this, RecipeDetailActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == android.R.id.home) {
+//            navigateUpTo(new Intent(StepDetailActivity.this, RecipeDetailActivity.class));
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void closeOnError() {
         finish();

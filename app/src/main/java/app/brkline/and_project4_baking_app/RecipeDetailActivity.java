@@ -1,5 +1,6 @@
 package app.brkline.and_project4_baking_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,5 +72,19 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             intent.putExtra(Constants.RECIPE_POSITION_SELECTED, recipePosition);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(Constants.RECIPE_EXTRA, recipe);
+        outState.putInt(Constants.RECIPE_POSITION_SELECTED, recipePosition);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        recipe = savedInstanceState.getParcelable(Constants.RECIPE_EXTRA);
+        recipePosition = savedInstanceState.getInt(Constants.RECIPE_POSITION_SELECTED);
     }
 }

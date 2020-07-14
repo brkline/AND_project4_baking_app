@@ -73,11 +73,11 @@ public class StepDetailActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        super.onBackPressed();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

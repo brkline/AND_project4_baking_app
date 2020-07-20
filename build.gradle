@@ -19,6 +19,7 @@ buildscript {
         okHttpVersion = "4.7.2"
         navigationVersion = "1.0.0"
         exoPlayerVersion = "2.11.7"
+        appCompatVersion = "1.1.0"
     }
 }
 

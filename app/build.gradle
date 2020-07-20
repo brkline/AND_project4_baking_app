@@ -66,6 +66,9 @@ dependencies {
     // CardView
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    // Support Library
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatVersion}"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"

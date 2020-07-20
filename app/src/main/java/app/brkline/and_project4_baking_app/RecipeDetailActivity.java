@@ -1,12 +1,15 @@
 package app.brkline.and_project4_baking_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
     Recipe recipe;
     int recipePosition;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         if (null == recipe) {
             closeOnError();
         }
-
+        toolbar = findViewById(R.id.toolbar);
         // Setup our ingredients RecyclerView
         setTitle(recipe.getName());
         RecipeIngredientsAdapter recipeIngredientsAdapter = new RecipeIngredientsAdapter(RecipeDetailActivity.this, recipe.getIngredients());
@@ -61,6 +65,28 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.recipe_detail_no_recipe, Toast.LENGTH_SHORT).show();
+    }
+
+    private void initToolbar() {
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

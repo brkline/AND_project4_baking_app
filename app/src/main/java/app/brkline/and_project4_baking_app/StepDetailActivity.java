@@ -1,11 +1,15 @@
 package app.brkline.and_project4_baking_app;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +24,7 @@ import app.brkline.and_project4_baking_app.models.RecipeStep;
 
 // Need to read over this as it provides an example that may help
 // https://developer.android.com/guide/components/fragments.html
-public class StepDetailActivity extends FragmentActivity {
+public class StepDetailActivity extends AppCompatActivity {
 
     Recipe recipe;
     int recipePosition;
@@ -30,6 +34,7 @@ public class StepDetailActivity extends FragmentActivity {
     int numberOfSteps;
     private int currentRecipeStepId;
     private List<RecipeStep> recipeSteps;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,10 @@ public class StepDetailActivity extends FragmentActivity {
             fragmentManager.beginTransaction().add(R.id.activity_step_detail_container, stepDetailFragment).commit();
         }
 
+        toolbar = findViewById(R.id.toolbar);
+        initToolbar();
+//        setSupportActionBar(toolbar);
+
 
 //        View.OnClickListener prevButtonOnClickListener = new View.OnClickListener() {
 //            @Override
@@ -123,6 +132,28 @@ public class StepDetailActivity extends FragmentActivity {
 //                return true;
 //            }
 //        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initToolbar() {
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void replaceFragmentInActivity(FragmentManager stepDetailFragmentManager, StepDetailFragment stepDetailFragment, int id) {

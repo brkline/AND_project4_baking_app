@@ -19,7 +19,6 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
@@ -120,21 +119,21 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
 //        initToolbar();
     }
 
-    private void initToolbar() {
-
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbarBinding.toolbar);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
-        toolbarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
-    }
+//    private void initToolbar() {
+//
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbarBinding.toolbar);
+//        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//        if (null != actionBar) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setDisplayShowHomeEnabled(true);
+//        }
+//        toolbarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().onBackPressed();
+//            }
+//        });
+//    }
 
     // Exoplayer code and overrides below based on Google CodeLab located here:
     // https://codelabs.developers.google.com/codelabs/exoplayer-intro/#0

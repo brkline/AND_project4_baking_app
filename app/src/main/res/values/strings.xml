@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipe_detail_no_recipe">We are missing recipe information.  Please try again.</string>
     <string name="step_detail_step_heading">Step Detail</string>
+    <string name="step_detail_activity_no_step_text">We are missing information about this step.  Please try again.</string>
+    <string name="fragment_step_detail_prev_btn_text">Prev</string>
+    <string name="fragment_step_detail_next_btn_text">next</string>
 </resources>

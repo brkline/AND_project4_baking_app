@@ -9,6 +9,6 @@ public class Constants {
 
     public static final String RECIPE_BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
     public static final String STEP_EXTRA = "step_extra";
-    public static final String STEP_POSITION_SELECTED = "recipe_step_position_selected";
+    public static final String STEP_NUMBER_OF_STEPS = "recipe_step_position_selected";
     public static final int STEP_DEFAULT_POSITION_SELECTED = -1;
 }

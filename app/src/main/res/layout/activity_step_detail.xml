@@ -6,40 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".StepDetailActivity">
 
-<!--    <com.google.android.exoplayer2.ui.PlayerView-->
-<!--        android:id="@+id/activity_step_detail_exoplayer_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
-<!--    <include layout="@layout/toolbar" />-->
 
-    <TextView
-        android:id="@+id/activity_step_detail_step_header_tv"
-        style="?android:attr/textAppearanceLarge"
+
+
+
+
+    <FrameLayout
+        android:id="@+id/activity_step_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/step_detail_step_heading"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textAllCaps="true"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="20sp" />
-<!--        app:layout_constraintTop_toBottomOf="@id/activity_step_detail_exoplayer_view"/>-->
-
-
-    <TextView
-        android:id="@+id/activity_step_detail_step_description_tv"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_step_detail_bottom_bar_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_step_detail_step_header_tv" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/activtity_step_detail_bottom_nav"/>
+        <Button
+            android:id="@+id/fragment_step_detail_prev_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/fragment_step_detail_prev_btn_text"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_step_detail_step_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fragment_step_detail_next_btn"
+            app:layout_constraintStart_toEndOf="@+id/fragment_step_detail_prev_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Step 1 of 6" />
+
+        <Button
+            android:id="@+id/fragment_step_detail_next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/fragment_step_detail_next_btn_text"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<LinearLayout android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/step_detail_container"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content" />-->
+<!--</LinearLayout>-->

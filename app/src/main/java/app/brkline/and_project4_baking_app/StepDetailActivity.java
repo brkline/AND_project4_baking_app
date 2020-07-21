@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import app.brkline.and_project4_baking_app.databinding.ActivityStepDetailBinding;
+import app.brkline.and_project4_baking_app.databinding.FragmentStepDetailBinding;
+import app.brkline.and_project4_baking_app.databinding.ToolbarBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 import app.brkline.and_project4_baking_app.models.RecipeStep;
 
@@ -27,12 +30,19 @@ public class StepDetailActivity extends AppCompatActivity {
     int numberOfSteps;
     private int currentRecipeStepId;
     private List<RecipeStep> recipeSteps;
-    Toolbar toolbar;
+//    Toolbar toolbar;
+    ActivityStepDetailBinding activityStepDetailBinding;
+    FragmentStepDetailBinding fragmentStepDetailBinding;
+    ToolbarBinding toolbarBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_step_detail);
+//        setContentView(R.layout.activity_step_detail);
+        activityStepDetailBinding = ActivityStepDetailBinding.inflate(getLayoutInflater());
+        View view = activityStepDetailBinding.getRoot();
+        toolbarBinding = activityStepDetailBinding.activityStepDetailIncludeToolbar;
+        setContentView(view);
 
         Intent intent = getIntent();
         if (null == intent) {
@@ -67,23 +77,25 @@ public class StepDetailActivity extends AppCompatActivity {
             bundle.putParcelable(Constants.STEP_EXTRA, recipeStep);
             bundle.putInt(Constants.STEP_NUMBER_OF_STEPS, numberOfSteps);
             stepDetailFragment.setArguments(bundle);
-            fragmentManager.beginTransaction().add(R.id.activity_step_detail_container, stepDetailFragment).commit();
+            fragmentManager.beginTransaction().add(
+                    activityStepDetailBinding.activityStepDetailContainer.getId(),
+                    stepDetailFragment).commit();
         }
 
         // Setup the toolbar
-        toolbar = findViewById(R.id.activity_step_detail_include_toolbar);
+//        toolbar = findViewById(R.id.activity_step_detail_include_toolbar);
         initToolbar();
 
         View.OnClickListener prevButtonOnClickListener = v -> onPrevStepClick();
 
         View.OnClickListener nextButtonOnClickListener = v -> onNextStepClick();
 
-        Button prevButton = findViewById(R.id.activity_step_detail_prev_btn);
-        Button nextButton = findViewById(R.id.activity_step_detail_next_btn);
-        prevButton.setOnClickListener(prevButtonOnClickListener);
-        nextButton.setOnClickListener(nextButtonOnClickListener);
+//        Button prevButton = findViewById(R.id.activity_step_detail_prev_btn);
+//        Button nextButton = findViewById(R.id.activity_step_detail_next_btn);
+        activityStepDetailBinding.activityStepDetailPrevBtn.setOnClickListener(prevButtonOnClickListener);
+        activityStepDetailBinding.activityStepDetailNextBtn.setOnClickListener(nextButtonOnClickListener);
         String stepOfTotal = (recipeStep.getId() + 1) + " of " + numberOfSteps;
-        
+        activityStepDetailBinding.activityStepDetailStepNumberTv.setText(stepOfTotal);
     }
 
     @Override
@@ -94,13 +106,13 @@ public class StepDetailActivity extends AppCompatActivity {
 
     private void initToolbar() {
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbarBinding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        toolbarBinding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void replaceFragmentInActivity(FragmentManager stepDetailFragmentManager, StepDetailFragment stepDetailFragment, int id) {
@@ -114,7 +126,9 @@ public class StepDetailActivity extends AppCompatActivity {
         recipeStep = step;
         FragmentTransaction recipeStepFragmentTransaction = getSupportFragmentManager().beginTransaction();
         StepDetailFragment recipeStepDetailFragment = StepDetailFragment.newInstance(step, numberOfSteps);
-        recipeStepFragmentTransaction.replace(R.id.activity_step_detail_container, recipeStepDetailFragment);
+        recipeStepFragmentTransaction.replace(
+                activityStepDetailBinding.activityStepDetailContainer.getId(),
+                recipeStepDetailFragment);
         recipeStepFragmentTransaction.addToBackStack(null);
         recipeStepFragmentTransaction.commit();
     }

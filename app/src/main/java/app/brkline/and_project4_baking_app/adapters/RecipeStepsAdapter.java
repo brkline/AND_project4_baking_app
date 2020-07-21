@@ -1,7 +1,6 @@
 package app.brkline.and_project4_baking_app.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import app.brkline.and_project4_baking_app.Constants;
 import app.brkline.and_project4_baking_app.R;
-import app.brkline.and_project4_baking_app.StepDetailActivity;
 import app.brkline.and_project4_baking_app.models.RecipeStep;
 
 public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.RecipeStepsViewHolder> {
@@ -65,7 +62,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         public RecipeStepsViewHolder(@NonNull View itemView) {
             super(itemView);
             shortDescriptionTextView = itemView.findViewById(R.id.recipe_steps_list_item_short_description_tv);
-            viewStepDetailImageButton= itemView.findViewById(R.id.recipe_steps_list_item_view_step_detail_ib);
+            viewStepDetailImageButton = itemView.findViewById(R.id.recipe_steps_list_item_view_step_detail_ib);
             viewStepDetailImageButton.setOnClickListener(this);
         }
 

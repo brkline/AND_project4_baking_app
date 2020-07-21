@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_step_detail_exoplayer_cl"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="800dp"
         app:layout_constraintBottom_toTopOf="@+id/activity_step_detail_step_header_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,6 +37,7 @@
         android:textAllCaps="true"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,6 +50,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_step_detail_step_header_tv"
         tools:text="Description of Step" />

@@ -1,23 +1,20 @@
 package app.brkline.and_project4_baking_app;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
 import app.brkline.and_project4_baking_app.databinding.ActivityStepDetailBinding;
-import app.brkline.and_project4_baking_app.databinding.FragmentStepDetailBinding;
 import app.brkline.and_project4_baking_app.databinding.ToolbarBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 import app.brkline.and_project4_baking_app.models.RecipeStep;
@@ -30,15 +27,13 @@ public class StepDetailActivity extends AppCompatActivity {
     int numberOfSteps;
     private int currentRecipeStepId;
     private List<RecipeStep> recipeSteps;
-//    Toolbar toolbar;
+
     ActivityStepDetailBinding activityStepDetailBinding;
-    FragmentStepDetailBinding fragmentStepDetailBinding;
     ToolbarBinding toolbarBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_step_detail);
         activityStepDetailBinding = ActivityStepDetailBinding.inflate(getLayoutInflater());
         View view = activityStepDetailBinding.getRoot();
         toolbarBinding = activityStepDetailBinding.activityStepDetailIncludeToolbar;
@@ -83,19 +78,25 @@ public class StepDetailActivity extends AppCompatActivity {
         }
 
         // Setup the toolbar
-//        toolbar = findViewById(R.id.activity_step_detail_include_toolbar);
         initToolbar();
 
         View.OnClickListener prevButtonOnClickListener = v -> onPrevStepClick();
 
         View.OnClickListener nextButtonOnClickListener = v -> onNextStepClick();
 
-//        Button prevButton = findViewById(R.id.activity_step_detail_prev_btn);
-//        Button nextButton = findViewById(R.id.activity_step_detail_next_btn);
         activityStepDetailBinding.activityStepDetailPrevBtn.setOnClickListener(prevButtonOnClickListener);
         activityStepDetailBinding.activityStepDetailNextBtn.setOnClickListener(nextButtonOnClickListener);
         String stepOfTotal = (recipeStep.getId() + 1) + " of " + numberOfSteps;
         activityStepDetailBinding.activityStepDetailStepNumberTv.setText(stepOfTotal);
+        int screenOrientation = getResources().getConfiguration().orientation;
+        if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            hideUi();
+        }
+    }
+
+    private void hideUi() {
+        activityStepDetailBinding.activityStepDetailBottomBarCl.setVisibility(View.GONE);
+        toolbarBinding.toolbar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -115,12 +116,8 @@ public class StepDetailActivity extends AppCompatActivity {
         toolbarBinding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
-    private void replaceFragmentInActivity(FragmentManager stepDetailFragmentManager, StepDetailFragment stepDetailFragment, int id) {
-        FragmentTransaction stepDetailFragmentTransaction = stepDetailFragmentManager.beginTransaction();
-        stepDetailFragmentTransaction.replace(id, stepDetailFragment);
-        stepDetailFragmentTransaction.commit();
-    }
-
+    // When we go to our next step, we need to make sure we set recipeStep since the
+    // onCreate method in this activity is not executed when we just replace the fragment.
     private void gotoStep(RecipeStep step) {
         currentRecipeStepId = step.getId();
         recipeStep = step;
@@ -141,21 +138,14 @@ public class StepDetailActivity extends AppCompatActivity {
         outstate.putInt(Constants.STEP_NUMBER_OF_STEPS, numberOfSteps);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == android.R.id.home) {
-//            navigateUpTo(new Intent(StepDetailActivity.this, RecipeDetailActivity.class));
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.step_detail_activity_no_step_text, Toast.LENGTH_SHORT).show();
     }
 
+    // For our prev and next click, we are going to move through the steps
+    // until we are either at the beginning or end.  If we reach either,
+    // then we'll just end the activity.
     public void onPrevStepClick() {
         currentRecipeStepId = recipeStep.getId();
         if (currentRecipeStepId > 0) {
@@ -167,10 +157,7 @@ public class StepDetailActivity extends AppCompatActivity {
 
     public void onNextStepClick() {
         currentRecipeStepId = recipeStep.getId();
-//        int nextStepId = recipeStep.getId() + 1;
         if (currentRecipeStepId < recipeSteps.size() - 1) {
-//            int nextStep = currentRecipeStepId + 1;
-//            RecipeStep nextRecipeStep = recipeSteps.get(nextStepId);
             gotoStep(recipeSteps.get(currentRecipeStepId + 1));
         } else {
             finish();

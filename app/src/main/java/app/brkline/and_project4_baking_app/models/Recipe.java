@@ -10,11 +10,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity(tableName = Constants.RECIPE_TABLE_NAME)
 public class Recipe implements Parcelable {
 
-//    @NonNull
-//    @PrimaryKey
     @SerializedName("id")
     private int id;
     @SerializedName("name")

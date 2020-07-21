@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recipe_list_item_default_padding">16dp</dimen>
+    <dimen name="recipe_list_item_w600dp_recipe_title_textsize">18sp</dimen>
+    <dimen name="recipe_list_item_default_elevation">5dp</dimen>
+</resources>

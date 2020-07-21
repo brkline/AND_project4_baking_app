@@ -1,15 +1,13 @@
 package app.brkline.and_project4_baking_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.List;
 
@@ -29,13 +27,11 @@ public class MainActivity extends AppCompatActivity {
     List<Recipe> recipes;
     RecipeAdapter recipeAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-
         getRecipes();
     }
 
@@ -67,49 +63,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerViewAdapter(List<Recipe> recipes) {
-            if (!recipes.isEmpty()) {
-                activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.GONE);
-                activityMainBinding.mainActivityRecipeRv.setVisibility(View.VISIBLE);
-                GridLayoutManager recipeGridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
-                LinearLayoutManager recipeLinearLayoutManager = new LinearLayoutManager(MainActivity.this);
-                recipeLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                activityMainBinding.mainActivityRecipeRv.setLayoutManager(recipeLinearLayoutManager);
-                recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
-                activityMainBinding.mainActivityRecipeRv.setAdapter(recipeAdapter);
-            } else {
-                activityMainBinding.mainActivityRecipeRv.setVisibility(View.GONE);
-                activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.VISIBLE);
-            }
+        if (!recipes.isEmpty()) {
+            activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.GONE);
+            activityMainBinding.mainActivityRecipeRv.setVisibility(View.VISIBLE);
+            GridLayoutManager recipeGridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
+            LinearLayoutManager recipeLinearLayoutManager = new LinearLayoutManager(MainActivity.this);
+            recipeLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            activityMainBinding.mainActivityRecipeRv.setLayoutManager(recipeLinearLayoutManager);
+            recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
+            activityMainBinding.mainActivityRecipeRv.setAdapter(recipeAdapter);
+        } else {
+            activityMainBinding.mainActivityRecipeRv.setVisibility(View.GONE);
+            activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.VISIBLE);
+        }
     }
-
-
-//    private class getRecipesTask extends AsyncTask<String, Void, List<Recipe>> {
-//
-//        @Override
-//        protected List<Recipe> doInBackground(String... strings) {
-//
-//            if (strings.length == 0) {
-//                return null;
-//            }
-//
-//            // Need to use Retrofit here to retrieve the recipes if they aren't
-//            // in the database.
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<Recipe> recipes) {
-//            if (!recipes.isEmpty()) {
-//                activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.GONE);
-//                RecipeAdapter recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
-//                GridLayoutManager recipeGridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
-//                RecyclerView recipeRecyclerView = activityMainBinding.mainActivityRecipeRv;
-//                recipeRecyclerView.setLayoutManager(recipeGridLayoutManager);
-//                recipeRecyclerView.setVisibility(View.VISIBLE);
-//                recipeRecyclerView.setAdapter(recipeAdapter);
-//            } else {
-//                activityMainBinding.mainActivityRecipeRv.setVisibility(View.GONE);
-//                activityMainBinding.mainActivityRecipeEmptyTv.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
 }

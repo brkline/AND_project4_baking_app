@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!--CardView is based off of Journal Dev post found here:
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--CardView is based off of Journal Dev post found here:
 https://www.journaldev.com/10024/android-recyclerview-android-cardview-example-tutorial-->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recipe_list_item_cv"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
     app:cardElevation="@dimen/recipe_list_item_default_elevation"
@@ -18,8 +20,8 @@ https://www.journaldev.com/10024/android-recyclerview-android-cardview-example-t
 
         <ImageView
             android:id="@+id/recipe_list_item_recipe_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +33,7 @@ https://www.journaldev.com/10024/android-recyclerview-android-cardview-example-t
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/recipe_list_item_default_padding"
+            android:textSize="@dimen/recipe_list_item_w600dp_recipe_title_textsize"
             app:layout_constraintTop_toBottomOf="@+id/recipe_list_item_recipe_iv"
             tools:text="Recipe Title" />
     </androidx.constraintlayout.widget.ConstraintLayout>

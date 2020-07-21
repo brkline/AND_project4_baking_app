@@ -3,9 +3,7 @@ package app.brkline.and_project4_baking_app.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,9 +33,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         RecipeListItemBinding recipeListItemBinding = RecipeListItemBinding.inflate(layoutInflater, parent, false);
         return new RecipeViewHolder(recipeListItemBinding);
-          // Data Binding inflate example from Mentor - Doesn't seem to work if I am using just ViewBinding.
-//        RecipeListItemBinding recipeListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.recipe_list_item, parent, false);
-//        return new RecipeViewHolder(recipeListItemBinding);
     }
 
     @Override
@@ -48,7 +43,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public int getItemCount() {
-        return null == recipes?0:recipes.size();
+        return null == recipes ? 0 : recipes.size();
     }
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder {

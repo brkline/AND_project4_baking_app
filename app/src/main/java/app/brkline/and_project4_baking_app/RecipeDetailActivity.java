@@ -1,24 +1,20 @@
 package app.brkline.and_project4_baking_app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import app.brkline.and_project4_baking_app.adapters.RecipeIngredientsAdapter;
 import app.brkline.and_project4_baking_app.adapters.RecipeStepsAdapter;
 import app.brkline.and_project4_baking_app.databinding.ActivityRecipeDetailBinding;
-import app.brkline.and_project4_baking_app.databinding.FragmentIngredientBinding;
-import app.brkline.and_project4_baking_app.databinding.FragmentStepDetailBinding;
-import app.brkline.and_project4_baking_app.databinding.FragmentStepsBinding;
 import app.brkline.and_project4_baking_app.databinding.ToolbarBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 import app.brkline.and_project4_baking_app.models.RecipeStep;

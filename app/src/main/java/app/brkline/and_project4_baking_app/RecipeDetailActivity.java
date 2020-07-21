@@ -1,6 +1,7 @@
 package app.brkline.and_project4_baking_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,6 +91,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     public boolean onOptionsItemSelected(MenuItem item) {
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveRecipe() {
+        SharedPreferences preferences = getSharedPreferences(Constants.PREF, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(Constants.RECIPE_ID, recipe.getId());
+        editor.putString(Constants.RECIPE_NAME, recipe.getName());
+        editor.apply();
     }
 
     @Override

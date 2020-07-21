@@ -15,6 +15,11 @@ import android.widget.Toast;
 
 import app.brkline.and_project4_baking_app.adapters.RecipeIngredientsAdapter;
 import app.brkline.and_project4_baking_app.adapters.RecipeStepsAdapter;
+import app.brkline.and_project4_baking_app.databinding.ActivityRecipeDetailBinding;
+import app.brkline.and_project4_baking_app.databinding.FragmentIngredientBinding;
+import app.brkline.and_project4_baking_app.databinding.FragmentStepDetailBinding;
+import app.brkline.and_project4_baking_app.databinding.FragmentStepsBinding;
+import app.brkline.and_project4_baking_app.databinding.ToolbarBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 import app.brkline.and_project4_baking_app.models.RecipeStep;
 
@@ -22,12 +27,16 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
     Recipe recipe;
     int recipePosition;
-    Toolbar toolbar;
+    ActivityRecipeDetailBinding activityRecipeDetailBinding;
+    ToolbarBinding toolbarBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_detail);
+        activityRecipeDetailBinding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
+        View view = activityRecipeDetailBinding.getRoot();
+        toolbarBinding = activityRecipeDetailBinding.activityRecipeIncludeToolbar;
+        setContentView(view);
 
         Intent intent = getIntent();
         if (null == intent) {
@@ -45,7 +54,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         }
 
         // Setup the toolbar
-        toolbar = findViewById(R.id.activity_recipe_toolbar);
         initToolbar();
 
         // Setup our ingredients RecyclerView
@@ -73,13 +81,13 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
     private void initToolbar() {
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbarBinding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        toolbarBinding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     @Override

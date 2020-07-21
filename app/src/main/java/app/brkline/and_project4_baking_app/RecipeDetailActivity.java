@@ -43,7 +43,11 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         if (null == recipe) {
             closeOnError();
         }
-        toolbar = findViewById(R.id.toolbar);
+
+        // Setup the toolbar
+        toolbar = findViewById(R.id.activity_recipe_toolbar);
+        initToolbar();
+
         // Setup our ingredients RecyclerView
         setTitle(recipe.getName());
         RecipeIngredientsAdapter recipeIngredientsAdapter = new RecipeIngredientsAdapter(RecipeDetailActivity.this, recipe.getIngredients());
@@ -75,12 +79,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     @Override

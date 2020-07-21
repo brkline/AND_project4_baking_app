@@ -6,17 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".StepDetailFragment">
 
-    <include
-        android:id="@+id/fragment_step_include_toolbar"
-        layout="@layout/toolbar" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_step_detail_exoplayer_cl"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintBottom_toTopOf="@+id/activity_step_detail_step_header_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_step_include_toolbar">
+        app:layout_constraintTop_toBottomOf="@id/activity_step_detail_include_toolbar">
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/fragment_step_detail_exoplayer_pv"

@@ -107,7 +107,7 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
 //        fragmentStepDetailBinding.activtityStepDetailBottomNav.setOnClickListener(container);
 //        fragmentStepDetailBinding.fragmentStepDetailPrevBtn.setOnClickListener(this);
 //        fragmentStepDetailBinding.fragmentStepDetailNextBtn.setOnClickListener(this);
-        toolbarBinding = fragmentStepDetailBinding.fragmentStepIncludeToolbar;
+//        toolbarBinding = fragmentStepDetailBinding.fragmentStepIncludeToolbar;
 //        String stepOfTotal = (recipeStep.getId() + 1) + " of " + numberOfSteps;
 //        fragmentStepDetailBinding.fragmentStepDetailStepNumberTv.setText(stepOfTotal);
         return fragmentStepDetailBinding.getRoot();

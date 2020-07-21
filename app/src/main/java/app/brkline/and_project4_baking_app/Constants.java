@@ -11,4 +11,5 @@ public class Constants {
     public static final String STEP_EXTRA = "step_extra";
     public static final String STEP_NUMBER_OF_STEPS = "recipe_step_position_selected";
     public static final int STEP_DEFAULT_POSITION_SELECTED = -1;
+    public static final String RECIPE_CURRENT_STEP_EXTRA = "current_recipe_step";
 }

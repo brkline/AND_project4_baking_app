@@ -3,7 +3,6 @@ package app.brkline.and_project4_baking_app;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,20 +16,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import app.brkline.and_project4_baking_app.databinding.ActivityStepDetailBinding;
 import app.brkline.and_project4_baking_app.models.Recipe;
 import app.brkline.and_project4_baking_app.models.RecipeStep;
 
-
-// Need to read over this as it provides an example that may help
-// https://developer.android.com/guide/components/fragments.html
 public class StepDetailActivity extends AppCompatActivity {
 
     Recipe recipe;
     int recipePosition;
-    int stepPosition;
     RecipeStep recipeStep;
-    TextView recipeStepDescriptionTextView;
     int numberOfSteps;
     private int currentRecipeStepId;
     private List<RecipeStep> recipeSteps;
@@ -64,14 +57,9 @@ public class StepDetailActivity extends AppCompatActivity {
         // Setup our ingredients RecyclerView
         setTitle(recipe.getName());
 
-//        recipeStepDescriptionTextView.setText(recipeStep.getDescription());
         recipeSteps = recipe.getSteps();
         numberOfSteps = recipeSteps.size() - 1;
 
-//        FragmentManager stepDetailFragmentManager = getSupportFragmentManager();
-//        StepDetailFragment stepDetailFragment = StepDetailFragment.newInstance(recipeStep, numberOfSteps);
-//        FragmentTransaction stepDetailFragmentTransaction = stepDetailFragmentManager.beginTransaction();
-//        stepDetailFragmentTransaction.replace(R.id.activity_step_detail_fl, stepDetailFragment);
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (null == savedInstanceState) {
             StepDetailFragment stepDetailFragment = new StepDetailFragment();
@@ -82,56 +70,20 @@ public class StepDetailActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.activity_step_detail_container, stepDetailFragment).commit();
         }
 
-        toolbar = findViewById(R.id.toolbar);
+        // Setup the toolbar
+        toolbar = findViewById(R.id.activity_step_detail_include_toolbar);
         initToolbar();
-//        setSupportActionBar(toolbar);
 
+        View.OnClickListener prevButtonOnClickListener = v -> onPrevStepClick();
 
-//        View.OnClickListener prevButtonOnClickListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onPrevStepClick(recipeStep);
-//            }
-//        };
-//
-//        View.OnClickListener nextButtonOnClickListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onNextStepClick(recipeStep);
-//            }
-//        };
-//
-//        Button prevButton = findViewById(R.id.activity_step_detail_prev_btn);
-//        Button nextButton = findViewById(R.id.activity_step_detail_next_btn);
-//        prevButton.setOnClickListener(prevButtonOnClickListener);
-//        nextButton.setOnClickListener(nextButtonOnClickListener);
-        // Bottom navigation based on Medium post located here:
-        // https://medium.com/@suragch/how-to-add-a-bottom-navigation-bar-in-android-958ed728ef6c
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.activtity_step_detail_bottom_nav);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                switch (menuItem.getItemId()) {
-//                    case (R.id.menu_bottom_nav_prev):
-//                        stepPosition = recipeStep.getId();
-//                        if (stepPosition > 0) {
-//                            gotoStep(recipe.getSteps().get(stepPosition - 1));
-//                        } else {
-//                            finish();
-//                        }
-//                        break;
-//                    case (R.id.menu_bottom_nav_next):
-//                        stepPosition = recipeStep.getId();
-//                        if (stepPosition < numberOfSteps - 1) {
-//                            gotoStep(recipe.getSteps().get(stepPosition + 1));
-//                        } else {
-//                            finish();
-//                        }
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
+        View.OnClickListener nextButtonOnClickListener = v -> onNextStepClick();
+
+        Button prevButton = findViewById(R.id.activity_step_detail_prev_btn);
+        Button nextButton = findViewById(R.id.activity_step_detail_next_btn);
+        prevButton.setOnClickListener(prevButtonOnClickListener);
+        nextButton.setOnClickListener(nextButtonOnClickListener);
+        String stepOfTotal = (recipeStep.getId() + 1) + " of " + numberOfSteps;
+        
     }
 
     @Override
@@ -148,12 +100,7 @@ public class StepDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void replaceFragmentInActivity(FragmentManager stepDetailFragmentManager, StepDetailFragment stepDetailFragment, int id) {
@@ -162,10 +109,12 @@ public class StepDetailActivity extends AppCompatActivity {
         stepDetailFragmentTransaction.commit();
     }
 
-    private void gotoStep(RecipeStep recipeStep) {
+    private void gotoStep(RecipeStep step) {
+        currentRecipeStepId = step.getId();
+        recipeStep = step;
         FragmentTransaction recipeStepFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        StepDetailFragment recipeStepDetailFragment = StepDetailFragment.newInstance(recipeStep, numberOfSteps);
-        recipeStepFragmentTransaction.replace(android.R.id.content, recipeStepDetailFragment);
+        StepDetailFragment recipeStepDetailFragment = StepDetailFragment.newInstance(step, numberOfSteps);
+        recipeStepFragmentTransaction.replace(R.id.activity_step_detail_container, recipeStepDetailFragment);
         recipeStepFragmentTransaction.addToBackStack(null);
         recipeStepFragmentTransaction.commit();
     }
@@ -173,6 +122,7 @@ public class StepDetailActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outstate) {
         super.onSaveInstanceState(outstate);
+        outstate.putInt(Constants.RECIPE_CURRENT_STEP_EXTRA, currentRecipeStepId);
         outstate.putParcelable(Constants.STEP_EXTRA, recipeStep);
         outstate.putInt(Constants.STEP_NUMBER_OF_STEPS, numberOfSteps);
     }
@@ -192,7 +142,7 @@ public class StepDetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.step_detail_activity_no_step_text, Toast.LENGTH_SHORT).show();
     }
 
-    public void onPrevStepClick(RecipeStep recipeStep) {
+    public void onPrevStepClick() {
         currentRecipeStepId = recipeStep.getId();
         if (currentRecipeStepId > 0) {
             gotoStep(recipeSteps.get(currentRecipeStepId - 1));
@@ -201,9 +151,12 @@ public class StepDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void onNextStepClick(RecipeStep recipeStep) {
+    public void onNextStepClick() {
         currentRecipeStepId = recipeStep.getId();
+//        int nextStepId = recipeStep.getId() + 1;
         if (currentRecipeStepId < recipeSteps.size() - 1) {
+//            int nextStep = currentRecipeStepId + 1;
+//            RecipeStep nextRecipeStep = recipeSteps.get(nextStepId);
             gotoStep(recipeSteps.get(currentRecipeStepId + 1));
         } else {
             finish();
